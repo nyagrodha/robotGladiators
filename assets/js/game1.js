@@ -17,14 +17,26 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 // console.log(enemyNames.length);
 
-var fight = function(enemyName) {
-    while (playerHealth > 0 && enemyHealth > 0) {
-         //Alert users that they are starting the round
-        if (playerHealth > 0) 
-         window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-        else {
-            window.alert(enemyName + ' has decimated ' + playerName + '.' + ' Game over.');
-        }
+// Wrap the game in a startGame() function
+
+// function to start a new game
+var startGame = function() {
+    for (var i = 0; i < enemyNames.length; i++) {
+      if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+  
+        var pickedEnemyName = enemyNames[i];
+  
+        enemyHealth = 50;
+  
+        fight(pickedEnemyName);
+      }
+      else {
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+      }
+    }
+  };
         
         // ask user if they'd like to fight or to run
         var promptFight = window.prompt('Would you like to FIGHT or to SKIP this battle?');
@@ -69,11 +81,11 @@ var fight = function(enemyName) {
         window.alert(playerName + ' has been decimated by ' + enemyName);
         // leave while loop if player's dead
         break;
+// endGame() function
     } else {
         window.alert(playerName + ' still has ' + playerHealth + '% power remaining.');
     }
-    }
-} ;
+
     
 
 
@@ -133,11 +145,18 @@ var fight = function(enemyName) {
 //             fight();
 //         }
 //         window.alert(playerName + " has chosen to skip the fight!");
-
+var startGame = function() {
 for(var i = 0; i < enemyNames.length; i++) {
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + "(i + 1));
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        fight(pickedEnemyName);
+    } else {
+        window.alert("You have lost " + playerName + " in battle. Game over!");
+        break;
+    }
 }
+};
 
 // fight()
