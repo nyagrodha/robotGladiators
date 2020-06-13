@@ -1,15 +1,16 @@
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
+var playerMoney = 10;
 
 // You can also log multiple values at once like this
-console.log("Your robot, " + playerName + ", packs an attack value of: " + playerAttack + ", and has " + playerHealth + "% power remaining.");
+console.log("Your robot, " + playerName + ", packs an attack value of " + playerAttack + ", and has " + playerHealth + "% power remaining.");
 
-var enemyName = "Roborto";
+var enemyNames = ["Roborto🤖", "Amy🤖Android", "Robo🤖Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function() {
+var fight = function(enemyName) {
 window.alert("Welcome to Robot Gladiators!");
 // ask the user if they wish to fight or to skip the fight.
 var promptFight = window.prompt("Would you like to FIGHT or to SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
@@ -20,7 +21,7 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
   enemyHealth = enemyHealth - playerAttack;
   // Log a resulting message to the console so we know that it worked.
   console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + "% power remaining.");
- // check enemy's health
+  // check enemy's health
   if (enemyHealth <= 0) {
      window.alert(playerName + " has destroyed " + enemyName);
   } else {
@@ -37,10 +38,22 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
       window.alert(playerName + " still has " + playerHealth + "% power remaining.");
     }
   } else if (promptFight === "skip" || promptFight === "SKIP") {
+    //confirm user wishes to skip
+    var confirmSkip = window.confirm("Are you sure you'd like to skip?")
+
+    // if yes (true), leave the fight
+    if (confirmSkip) {
+      window.alert(playerName + " has decided to skip this fight. Goodbye!");
+      playerMoney = playerMoney - 2;
+    } else {
+      fight();
+    }
     window.alert(playerName + " has chosen to skip the fight!");
   } else {
     window.alert("You need to pick a valid option. Try again please.");
   }
   }
 
-fight();
+for (var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i]);
+}
