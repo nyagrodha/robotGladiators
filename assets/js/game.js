@@ -23,15 +23,17 @@ var fight = function (enemyName) {
       // if yes (true), leave the fight
       if (confirmSkip) {
         window.alert(playerName + " has decided to skip this fight. Goodbye!");
-        playerMoney = playerMoney - 2;
+        playerMoney = Math.max(0, playerMoney - 2);
         console.log("playerMoney: " + playerMoney);
         break;
       }
     }
     console.log(promptFight);
     //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    // if player chooses to fight, then fight
-    enemyHealth = enemyHealth - playerAttack;
+    //  generate random damage value based on player's attack power
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+
+    enemyHealth = Math.max(0, enemyHealth - damage);
     // Log a resulting message to the console so we know that it worked.
     console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + "% power remaining.");
     // check enemy's health
@@ -42,7 +44,10 @@ var fight = function (enemyName) {
       window.alert(enemyName + " still has " + enemyHealth + "% power remaining.");
     }
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-    playerHealth = playerHealth - enemyAttack;
+    // generate random damage value based on player's attack power
+    var damage = randomNumber(enemyAttack - 3, enemyAttack);
+
+    playerHealth = Math.max(0, playerHealth - damage);
     // Log a resulting message to the console so we know that it worked.
     console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + "% power remaining.");
     // check player's health
@@ -55,8 +60,6 @@ var fight = function (enemyName) {
   }
 }
 
-<<<<<<< HEAD
-=======
 var shop = function () {
   // ask the player what they'd like to do
   var shopOptionPrompt = window.prompt("Would you like to REFILL your power, UPGRADE your attack, or LEAVE the store? Please enter 'REFILL,' or 'UPGRADE,' or 'LEAVE' to choose.");
@@ -68,7 +71,7 @@ var shop = function () {
 
         // increase health and decrease money
         playerHealth = playerHealth + 20;
-        playerMoney = playerMoney - 7;
+        playerMoney = Math.max(0, playerMoney - 7);
       } else {
         window.alert("You don't have enough trinkets at this time.");
       }
@@ -80,7 +83,7 @@ var shop = function () {
 
         // increase attack and decrease money
         playerAttack = playerAttack + 6;
-        playerMoney = playerMoney - 7;
+        playerMoney = Math.max(0, playerMoney - 7);
       } else {
         window.alert("You don't have enough trinkets at this time.");
       }
@@ -100,7 +103,14 @@ var shop = function () {
   }
 }
 
->>>>>>> feature/shop
+// function to generate a random numeric value
+
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+  return value;
+}
+
 var startGame = function () {
   // reset player stats
   playerHealth = 100;
@@ -110,10 +120,8 @@ var startGame = function () {
     if (playerHealth > 0) {
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
       var pickedEnemyName = enemyNames[i];
-      enemyHealth = 50;
+      enemyHealth = randomNumber(40, 60);
       fight(pickedEnemyName);
-<<<<<<< HEAD
-=======
       if (playerHealth > 0 && i < enemyNames.length - 1) {
         // ask if user wants to use the store before next round
         var storeConfirm = window.confirm("This battle is over. Would you like to visit the shop before the next round?");
@@ -123,7 +131,6 @@ var startGame = function () {
           shop();
         }
       }
->>>>>>> feature/shop
     } else {
       window.alert("Your robot has been lost in battle. Game over!");
       break;
@@ -143,18 +150,6 @@ var endGame = function () {
   } else {
     window.alert("The game has now ended. Let's see how you did!");
   }
-<<<<<<< HEAD
-   // ask the player if they'd like to play again
-   var playAgainConfirm = window.confirm("Would you like to play again?");
-   if (playAgainConfirm) {
-     // restart the game
-     startGame();
-   } else {
-     window.alert("Thank you for playing Robot Gladiators! Come back soon!");
-   }
- }
- endGame();
-=======
   // ask the player if they'd like to play again
   var playAgainConfirm = window.confirm("Would you like to play again?");
   if (playAgainConfirm) {
@@ -165,4 +160,3 @@ var endGame = function () {
   }
 }
 endGame();
->>>>>>> feature/shop
